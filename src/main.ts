@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 
 import { ApiError } from "./api-error";
@@ -6,9 +7,10 @@ import { userByUserIdRouter } from "./routers/users.by.userId.router";
 
 const app = express();
 
-const Port = 3000;
+const Port = 3006;
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", userRouter);
@@ -26,6 +28,6 @@ process.on("uncaughtException", (error) => {
   process.exit(1);
 });
 
-app.listen(Port, "localHost", () => {
-  console.log(`Server is running at http://localHost:${Port}/`);
+app.listen(Port, "localhost", () => {
+  console.log(`Server is running at http://localhost:${Port}/`);
 });
